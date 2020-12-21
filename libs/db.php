@@ -6,7 +6,7 @@ set_time_limit(0);
 $mysqli = new mysqli(
 	"127.0.0.1",
 	"root",
-	"password",
+	"root",
 	"dbkawal"
 );
 
