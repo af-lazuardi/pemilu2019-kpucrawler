@@ -187,7 +187,8 @@ $PRV=explode(",",$kdprovz);
 $data_loop = 0;
 $limit_off = 0;
 //while($limit_off <= 100){
-while(true) {
+$break_loop = false;
+while(!$break_loop) {
   for ($PP=0;$PP<count($PRV);$PP++){
     //$rows=all("SELECT `kpu_uri` FROM `v04_kel_uri` WHERE `kdprov`='{$PRV[$PP]}' ORDER BY `last_dprri` ASC LIMIT $limit_off,10");
 	//$rows=all("SELECT `kpu_uri` FROM `v04_kel_uri` WHERE `kdprov`='42385' AND `kdkota`='51358' ORDER BY `last_dprri` ASC LIMIT $limit_off,10");
@@ -195,7 +196,8 @@ while(true) {
 	//$rows=all("SELECT `kpu_uri` FROM `v04_kel_uri` WHERE `kdprov`='42385' AND `kdkota`='51358' AND `kdkec`='51513' AND `last_dprri` IS NULL");
 	
 	//$rows=all("SELECT `kpu_uri` FROM `v04_kel_uri` WHERE `kdprov`='42385' AND `kdkota`='51358' AND `last_dprri` IS NULL ORDER BY `kdkel` ASC LIMIT $limit_off,10");
-	$rows=all("SELECT `kpu_uri` FROM `v04_kel_uri` WHERE `kdprov`='42385' AND `kdkota`='51358' AND `kdkec`='51527' AND `last_dprri` IS NULL");
+	//$rows=all("SELECT `kpu_uri` FROM `v04_kel_uri` WHERE `kdprov`='42385' AND `kdkota`='51358' AND `kdkec`='51527' AND `last_dprri` IS NULL");
+	$rows=all("SELECT `kpu_uri` FROM `v04_kel_uri` WHERE `kdprov`='42385' AND `kdkota`='51358' AND `kdkec`='51533'");
 	
 	if(count($rows)>0) {
 		
@@ -220,6 +222,7 @@ while(true) {
 		}
 	}
 	else {
+		$break_loop = true;
 		echo " LOOP done \n";
 		break;
 	}
