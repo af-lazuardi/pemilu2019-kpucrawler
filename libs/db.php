@@ -5,9 +5,9 @@ set_time_limit(0);
 
 $mysqli = new mysqli(
 	"127.0.0.1",
-	"root",
-	"root",
-	"dbkawal"
+	"kjamid_dbkawal",//"root",
+	"dbkawal175",//"root",
+	"kjamid_dbkawal"//"dbkawal"
 );
 
 function query($str){
@@ -91,7 +91,7 @@ function www_gets($urls){
   do {
     $status = curl_multi_exec($mh, $active);
     if ($active) {
-      if (++$n>200){
+      if (++$n>400){
         $n=0;
 		return null;
       }
