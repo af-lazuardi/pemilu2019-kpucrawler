@@ -3,8 +3,8 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Dec 21, 2020 at 08:29 AM
--- Server version: 5.7.32-0ubuntu0.18.04.1
+-- Generation Time: 24 Des 2020 pada 12.47
+-- Versi Server: 5.7.32-0ubuntu0.18.04.1
 -- PHP Version: 7.2.24-0ubuntu0.18.04.7
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
@@ -25,7 +25,7 @@ USE `dbkawal`;
 -- --------------------------------------------------------
 
 --
--- Table structure for table `t_kec`
+-- Struktur dari tabel `t_kec`
 --
 
 DROP TABLE IF EXISTS `t_kec`;
@@ -38,7 +38,7 @@ CREATE TABLE `t_kec` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `t_kel`
+-- Struktur dari tabel `t_kel`
 --
 
 DROP TABLE IF EXISTS `t_kel`;
@@ -47,13 +47,16 @@ CREATE TABLE `t_kel` (
   `kdkec` int(255) NOT NULL,
   `kel` varchar(64) DEFAULT NULL,
   `last` datetime DEFAULT '2000-01-01 00:00:00',
+  `last_dprri` datetime DEFAULT '2000-01-01 00:00:00',
+  `last_dprdprov` datetime DEFAULT '2000-01-01 00:00:00',
+  `last_dprdkab` datetime DEFAULT '2000-01-01 00:00:00',
   `lastpnt` datetime DEFAULT '2000-01-01 00:00:00'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `t_kota`
+-- Struktur dari tabel `t_kota`
 --
 
 DROP TABLE IF EXISTS `t_kota`;
@@ -66,7 +69,7 @@ CREATE TABLE `t_kota` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `t_prov`
+-- Struktur dari tabel `t_prov`
 --
 
 DROP TABLE IF EXISTS `t_prov`;
@@ -78,7 +81,7 @@ CREATE TABLE `t_prov` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `t_tps`
+-- Struktur dari tabel `t_tps`
 --
 
 DROP TABLE IF EXISTS `t_tps`;
@@ -102,7 +105,7 @@ CREATE TABLE `t_tps` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `t_tps_dprdkab`
+-- Struktur dari tabel `t_tps_dprdkab`
 --
 
 DROP TABLE IF EXISTS `t_tps_dprdkab`;
@@ -144,7 +147,7 @@ CREATE TABLE `t_tps_dprdkab` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `t_tps_dprdprov`
+-- Struktur dari tabel `t_tps_dprdprov`
 --
 
 DROP TABLE IF EXISTS `t_tps_dprdprov`;
@@ -186,7 +189,7 @@ CREATE TABLE `t_tps_dprdprov` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `t_tps_dprri`
+-- Struktur dari tabel `t_tps_dprri`
 --
 
 DROP TABLE IF EXISTS `t_tps_dprri`;
@@ -229,7 +232,7 @@ CREATE TABLE `t_tps_dprri` (
 
 --
 -- Stand-in structure for view `v01_kota`
--- (See below for the actual view)
+-- (Lihat di bawah untuk tampilan aktual)
 --
 DROP VIEW IF EXISTS `v01_kota`;
 CREATE TABLE `v01_kota` (
@@ -243,7 +246,7 @@ CREATE TABLE `v01_kota` (
 
 --
 -- Stand-in structure for view `v02_kec`
--- (See below for the actual view)
+-- (Lihat di bawah untuk tampilan aktual)
 --
 DROP VIEW IF EXISTS `v02_kec`;
 CREATE TABLE `v02_kec` (
@@ -259,13 +262,16 @@ CREATE TABLE `v02_kec` (
 
 --
 -- Stand-in structure for view `v03_kel`
--- (See below for the actual view)
+-- (Lihat di bawah untuk tampilan aktual)
 --
 DROP VIEW IF EXISTS `v03_kel`;
 CREATE TABLE `v03_kel` (
 `kdkel` int(255)
 ,`kel` varchar(64)
 ,`last` datetime
+,`last_dprri` datetime
+,`last_dprdprov` datetime
+,`last_dprdkab` datetime
 ,`lastpnt` datetime
 ,`kdkec` int(255)
 ,`kec` varchar(255)
@@ -279,13 +285,16 @@ CREATE TABLE `v03_kel` (
 
 --
 -- Stand-in structure for view `v04_kel_uri`
--- (See below for the actual view)
+-- (Lihat di bawah untuk tampilan aktual)
 --
 DROP VIEW IF EXISTS `v04_kel_uri`;
 CREATE TABLE `v04_kel_uri` (
 `kdkel` int(255)
 ,`kel` varchar(64)
 ,`last` datetime
+,`last_dprri` datetime
+,`last_dprdprov` datetime
+,`last_dprdkab` datetime
 ,`lastpnt` datetime
 ,`kdkec` int(255)
 ,`kec` varchar(255)
@@ -300,7 +309,7 @@ CREATE TABLE `v04_kel_uri` (
 
 --
 -- Stand-in structure for view `v10_tps_cmp`
--- (See below for the actual view)
+-- (Lihat di bawah untuk tampilan aktual)
 --
 DROP VIEW IF EXISTS `v10_tps_cmp`;
 CREATE TABLE `v10_tps_cmp` (
@@ -320,7 +329,7 @@ CREATE TABLE `v10_tps_cmp` (
 
 --
 -- Stand-in structure for view `v11_tps_cmponly`
--- (See below for the actual view)
+-- (Lihat di bawah untuk tampilan aktual)
 --
 DROP VIEW IF EXISTS `v11_tps_cmponly`;
 CREATE TABLE `v11_tps_cmponly` (
@@ -340,7 +349,7 @@ CREATE TABLE `v11_tps_cmponly` (
 
 --
 -- Stand-in structure for view `v12_tps_cmpdetails`
--- (See below for the actual view)
+-- (Lihat di bawah untuk tampilan aktual)
 --
 DROP VIEW IF EXISTS `v12_tps_cmpdetails`;
 CREATE TABLE `v12_tps_cmpdetails` (
@@ -369,7 +378,7 @@ CREATE TABLE `v12_tps_cmpdetails` (
 
 --
 -- Stand-in structure for view `v13_tps_sumcmp`
--- (See below for the actual view)
+-- (Lihat di bawah untuk tampilan aktual)
 --
 DROP VIEW IF EXISTS `v13_tps_sumcmp`;
 CREATE TABLE `v13_tps_sumcmp` (
@@ -382,7 +391,7 @@ CREATE TABLE `v13_tps_sumcmp` (
 
 --
 -- Stand-in structure for view `v20_validate_kpu`
--- (See below for the actual view)
+-- (Lihat di bawah untuk tampilan aktual)
 --
 DROP VIEW IF EXISTS `v20_validate_kpu`;
 CREATE TABLE `v20_validate_kpu` (
@@ -404,7 +413,7 @@ CREATE TABLE `v20_validate_kpu` (
 
 --
 -- Stand-in structure for view `v21_validate_kpu_cmp`
--- (See below for the actual view)
+-- (Lihat di bawah untuk tampilan aktual)
 --
 DROP VIEW IF EXISTS `v21_validate_kpu_cmp`;
 CREATE TABLE `v21_validate_kpu_cmp` (
@@ -428,7 +437,7 @@ CREATE TABLE `v21_validate_kpu_cmp` (
 
 --
 -- Stand-in structure for view `v22_invalid_kpu_detail`
--- (See below for the actual view)
+-- (Lihat di bawah untuk tampilan aktual)
 --
 DROP VIEW IF EXISTS `v22_invalid_kpu_detail`;
 CREATE TABLE `v22_invalid_kpu_detail` (
@@ -461,7 +470,7 @@ CREATE TABLE `v22_invalid_kpu_detail` (
 
 --
 -- Stand-in structure for view `v25_invalid_kpu_data_formatted`
--- (See below for the actual view)
+-- (Lihat di bawah untuk tampilan aktual)
 --
 DROP VIEW IF EXISTS `v25_invalid_kpu_data_formatted`;
 CREATE TABLE `v25_invalid_kpu_data_formatted` (
@@ -494,7 +503,7 @@ CREATE TABLE `v25_invalid_kpu_data_formatted` (
 
 --
 -- Stand-in structure for view `v26_invalid_kpu_perprov`
--- (See below for the actual view)
+-- (Lihat di bawah untuk tampilan aktual)
 --
 DROP VIEW IF EXISTS `v26_invalid_kpu_perprov`;
 CREATE TABLE `v26_invalid_kpu_perprov` (
@@ -516,7 +525,7 @@ CREATE TABLE `v26_invalid_kpu_perprov` (
 
 --
 -- Stand-in structure for view `v30_kpupantau_cmp`
--- (See below for the actual view)
+-- (Lihat di bawah untuk tampilan aktual)
 --
 DROP VIEW IF EXISTS `v30_kpupantau_cmp`;
 CREATE TABLE `v30_kpupantau_cmp` (
@@ -536,7 +545,7 @@ CREATE TABLE `v30_kpupantau_cmp` (
 
 --
 -- Stand-in structure for view `v31_kpupantau_cmponly`
--- (See below for the actual view)
+-- (Lihat di bawah untuk tampilan aktual)
 --
 DROP VIEW IF EXISTS `v31_kpupantau_cmponly`;
 CREATE TABLE `v31_kpupantau_cmponly` (
@@ -556,7 +565,7 @@ CREATE TABLE `v31_kpupantau_cmponly` (
 
 --
 -- Stand-in structure for view `v32_kpupantau_formatted`
--- (See below for the actual view)
+-- (Lihat di bawah untuk tampilan aktual)
 --
 DROP VIEW IF EXISTS `v32_kpupantau_formatted`;
 CREATE TABLE `v32_kpupantau_formatted` (
@@ -587,7 +596,7 @@ CREATE TABLE `v32_kpupantau_formatted` (
 
 --
 -- Stand-in structure for view `v40_detail_data_tps`
--- (See below for the actual view)
+-- (Lihat di bawah untuk tampilan aktual)
 --
 DROP VIEW IF EXISTS `v40_detail_data_tps`;
 CREATE TABLE `v40_detail_data_tps` (
@@ -616,7 +625,7 @@ CREATE TABLE `v40_detail_data_tps` (
 
 --
 -- Stand-in structure for view `v50_sum_data`
--- (See below for the actual view)
+-- (Lihat di bawah untuk tampilan aktual)
 --
 DROP VIEW IF EXISTS `v50_sum_data`;
 CREATE TABLE `v50_sum_data` (
@@ -629,7 +638,7 @@ CREATE TABLE `v50_sum_data` (
 
 --
 -- Stand-in structure for view `v50_sum_data_persen`
--- (See below for the actual view)
+-- (Lihat di bawah untuk tampilan aktual)
 --
 DROP VIEW IF EXISTS `v50_sum_data_persen`;
 CREATE TABLE `v50_sum_data_persen` (
@@ -643,7 +652,7 @@ CREATE TABLE `v50_sum_data_persen` (
 -- --------------------------------------------------------
 
 --
--- Structure for view `v01_kota`
+-- Struktur untuk view `v01_kota`
 --
 DROP TABLE IF EXISTS `v01_kota`;
 
@@ -652,7 +661,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 -- --------------------------------------------------------
 
 --
--- Structure for view `v02_kec`
+-- Struktur untuk view `v02_kec`
 --
 DROP TABLE IF EXISTS `v02_kec`;
 
@@ -661,25 +670,25 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 -- --------------------------------------------------------
 
 --
--- Structure for view `v03_kel`
+-- Struktur untuk view `v03_kel`
 --
 DROP TABLE IF EXISTS `v03_kel`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `v03_kel`  AS  select `t_kel`.`kdkel` AS `kdkel`,`t_kel`.`kel` AS `kel`,`t_kel`.`last` AS `last`,`t_kel`.`lastpnt` AS `lastpnt`,`t_kel`.`kdkec` AS `kdkec`,`v02_kec`.`kec` AS `kec`,`v02_kec`.`kdkota` AS `kdkota`,`v02_kec`.`kota` AS `kota`,`v02_kec`.`kdprov` AS `kdprov`,`v02_kec`.`prov` AS `prov` from (`t_kel` join `v02_kec` on((`t_kel`.`kdkec` = `v02_kec`.`kdkec`))) ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `v03_kel`  AS  select `t_kel`.`kdkel` AS `kdkel`,`t_kel`.`kel` AS `kel`,`t_kel`.`last` AS `last`,`t_kel`.`last_dprri` AS `last_dprri`,`t_kel`.`last_dprdprov` AS `last_dprdprov`,`t_kel`.`last_dprdkab` AS `last_dprdkab`,`t_kel`.`lastpnt` AS `lastpnt`,`t_kel`.`kdkec` AS `kdkec`,`v02_kec`.`kec` AS `kec`,`v02_kec`.`kdkota` AS `kdkota`,`v02_kec`.`kota` AS `kota`,`v02_kec`.`kdprov` AS `kdprov`,`v02_kec`.`prov` AS `prov` from (`t_kel` join `v02_kec` on((`t_kel`.`kdkec` = `v02_kec`.`kdkec`))) ;
 
 -- --------------------------------------------------------
 
 --
--- Structure for view `v04_kel_uri`
+-- Struktur untuk view `v04_kel_uri`
 --
 DROP TABLE IF EXISTS `v04_kel_uri`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `v04_kel_uri`  AS  select `v03_kel`.`kdkel` AS `kdkel`,`v03_kel`.`kel` AS `kel`,`v03_kel`.`last` AS `last`,`v03_kel`.`lastpnt` AS `lastpnt`,`v03_kel`.`kdkec` AS `kdkec`,`v03_kel`.`kec` AS `kec`,`v03_kel`.`kdkota` AS `kdkota`,`v03_kel`.`kota` AS `kota`,`v03_kel`.`kdprov` AS `kdprov`,`v03_kel`.`prov` AS `prov`,concat(`v03_kel`.`kdprov`,'/',`v03_kel`.`kdkota`,'/',`v03_kel`.`kdkec`,'/',`v03_kel`.`kdkel`) AS `kpu_uri` from `v03_kel` ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `v04_kel_uri`  AS  select `v03_kel`.`kdkel` AS `kdkel`,`v03_kel`.`kel` AS `kel`,`v03_kel`.`last` AS `last`,`v03_kel`.`last_dprri` AS `last_dprri`,`v03_kel`.`last_dprdprov` AS `last_dprdprov`,`v03_kel`.`last_dprdkab` AS `last_dprdkab`,`v03_kel`.`lastpnt` AS `lastpnt`,`v03_kel`.`kdkec` AS `kdkec`,`v03_kel`.`kec` AS `kec`,`v03_kel`.`kdkota` AS `kdkota`,`v03_kel`.`kota` AS `kota`,`v03_kel`.`kdprov` AS `kdprov`,`v03_kel`.`prov` AS `prov`,concat(`v03_kel`.`kdprov`,'/',`v03_kel`.`kdkota`,'/',`v03_kel`.`kdkec`,'/',`v03_kel`.`kdkel`) AS `kpu_uri` from `v03_kel` ;
 
 -- --------------------------------------------------------
 
 --
--- Structure for view `v10_tps_cmp`
+-- Struktur untuk view `v10_tps_cmp`
 --
 DROP TABLE IF EXISTS `v10_tps_cmp`;
 
@@ -688,7 +697,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 -- --------------------------------------------------------
 
 --
--- Structure for view `v11_tps_cmponly`
+-- Struktur untuk view `v11_tps_cmponly`
 --
 DROP TABLE IF EXISTS `v11_tps_cmponly`;
 
@@ -697,7 +706,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 -- --------------------------------------------------------
 
 --
--- Structure for view `v12_tps_cmpdetails`
+-- Struktur untuk view `v12_tps_cmpdetails`
 --
 DROP TABLE IF EXISTS `v12_tps_cmpdetails`;
 
@@ -706,7 +715,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 -- --------------------------------------------------------
 
 --
--- Structure for view `v13_tps_sumcmp`
+-- Struktur untuk view `v13_tps_sumcmp`
 --
 DROP TABLE IF EXISTS `v13_tps_sumcmp`;
 
@@ -715,7 +724,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 -- --------------------------------------------------------
 
 --
--- Structure for view `v20_validate_kpu`
+-- Struktur untuk view `v20_validate_kpu`
 --
 DROP TABLE IF EXISTS `v20_validate_kpu`;
 
@@ -724,7 +733,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 -- --------------------------------------------------------
 
 --
--- Structure for view `v21_validate_kpu_cmp`
+-- Struktur untuk view `v21_validate_kpu_cmp`
 --
 DROP TABLE IF EXISTS `v21_validate_kpu_cmp`;
 
@@ -733,7 +742,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 -- --------------------------------------------------------
 
 --
--- Structure for view `v22_invalid_kpu_detail`
+-- Struktur untuk view `v22_invalid_kpu_detail`
 --
 DROP TABLE IF EXISTS `v22_invalid_kpu_detail`;
 
@@ -742,7 +751,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 -- --------------------------------------------------------
 
 --
--- Structure for view `v25_invalid_kpu_data_formatted`
+-- Struktur untuk view `v25_invalid_kpu_data_formatted`
 --
 DROP TABLE IF EXISTS `v25_invalid_kpu_data_formatted`;
 
@@ -751,7 +760,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 -- --------------------------------------------------------
 
 --
--- Structure for view `v26_invalid_kpu_perprov`
+-- Struktur untuk view `v26_invalid_kpu_perprov`
 --
 DROP TABLE IF EXISTS `v26_invalid_kpu_perprov`;
 
@@ -760,7 +769,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 -- --------------------------------------------------------
 
 --
--- Structure for view `v30_kpupantau_cmp`
+-- Struktur untuk view `v30_kpupantau_cmp`
 --
 DROP TABLE IF EXISTS `v30_kpupantau_cmp`;
 
@@ -769,7 +778,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 -- --------------------------------------------------------
 
 --
--- Structure for view `v31_kpupantau_cmponly`
+-- Struktur untuk view `v31_kpupantau_cmponly`
 --
 DROP TABLE IF EXISTS `v31_kpupantau_cmponly`;
 
@@ -778,7 +787,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 -- --------------------------------------------------------
 
 --
--- Structure for view `v32_kpupantau_formatted`
+-- Struktur untuk view `v32_kpupantau_formatted`
 --
 DROP TABLE IF EXISTS `v32_kpupantau_formatted`;
 
@@ -787,7 +796,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 -- --------------------------------------------------------
 
 --
--- Structure for view `v40_detail_data_tps`
+-- Struktur untuk view `v40_detail_data_tps`
 --
 DROP TABLE IF EXISTS `v40_detail_data_tps`;
 
@@ -796,7 +805,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 -- --------------------------------------------------------
 
 --
--- Structure for view `v50_sum_data`
+-- Struktur untuk view `v50_sum_data`
 --
 DROP TABLE IF EXISTS `v50_sum_data`;
 
@@ -805,7 +814,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 -- --------------------------------------------------------
 
 --
--- Structure for view `v50_sum_data_persen`
+-- Struktur untuk view `v50_sum_data_persen`
 --
 DROP TABLE IF EXISTS `v50_sum_data_persen`;
 

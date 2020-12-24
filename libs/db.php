@@ -91,10 +91,12 @@ function www_gets($urls){
   do {
     $status = curl_multi_exec($mh, $active);
     if ($active) {
-      if (++$n>5){
-        echo ".";
+      if (++$n>200){
         $n=0;
+		return null;
       }
+	  if($n%5 == 0)
+		echo ".";
       curl_multi_select($mh);
     }
   } while ($active && $status == CURLM_OK);
@@ -120,15 +122,21 @@ function wget($url){
 function wgets($urls){
   $out=array();
   $outs=www_gets($urls);
-  for ($i=0;$i<count($urls);$i++){
-    if (!$outs[$i]){
-      $out[$i]=wget($urls[$i]);
-    }
-    else{
-      $out[$i]=json_decode($outs[$i],true);
-    }
+  
+  if(is_null($outs)) {
+	  return null;
   }
-  return $out;
+  else {
+	  for ($i=0;$i<count($urls);$i++){
+		if (!$outs[$i]){
+		  $out[$i]=wget($urls[$i]);
+		}
+		else{
+		  $out[$i]=json_decode($outs[$i],true);
+		}
+	  }
+	  return $out;
+  }
 }
 
 ?>

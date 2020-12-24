@@ -36,6 +36,9 @@ function start_suara($uris){
   echo "\n $all_uris[2]";
   echo "\n $all_uris[3]";*/
   $suara=wgets($all_uris);
+  if(is_null($suara)) {
+	  return null;
+  }
   echo "\n  ## TPS ";
   $n=0;
   $out = array();
@@ -122,6 +125,9 @@ function start_suara($uris){
     
     if (count($tpsurls)>0){
       $tpss=wgets($tpsurls);
+	  if(is_null($tpss)) {
+		  return null;
+	  }
       for ($j=0;$j<count($tpss);$j++){
         $pss=$tpss[$j];
         $q="";
@@ -136,7 +142,7 @@ function start_suara($uris){
       }
     }
     
-    $uq[]="UPDATE `t_kel` SET `last`=NOW() WHERE `kdkel`='{$kdkels[$n]}'";
+    $uq[]="UPDATE `t_kel` SET `last_dprri`=NOW() WHERE `kdkel`='{$kdkels[$n]}'";
     $n++;
   }
   echo "\n";
@@ -155,6 +161,8 @@ function start_suara($uris){
        $mysqli->next_result();
     }
   }
+  
+  return 1;
 }
 
 /*
@@ -172,22 +180,51 @@ if (!$kdprovz){
 
 $PRV=explode(",",$kdprovz);
 
+//51527
+//51533
+
 // for ($JJ=0;$JJ<4;$JJ++){
-//while(true){
+$data_loop = 0;
+$limit_off = 0;
+//while($limit_off <= 100){
+while(true) {
   for ($PP=0;$PP<count($PRV);$PP++){
-    $rows=all("SELECT `kpu_uri` FROM `v04_kel_uri` WHERE `kdprov`='{$PRV[$PP]}' ORDER BY `last` ASC LIMIT 10,100");
-    $urls=array();
-
-    for ($i=0;$i<count($rows);$i++){
-      $urls[$i]=$rows[$i]['kpu_uri'];
-      //echo "\n $urls[$i]";
-    }
-    //prov/kota-kab/kec/kel
-    //42385/42386/42387/42388
-    start_suara($urls);
-
+    //$rows=all("SELECT `kpu_uri` FROM `v04_kel_uri` WHERE `kdprov`='{$PRV[$PP]}' ORDER BY `last_dprri` ASC LIMIT $limit_off,10");
+	//$rows=all("SELECT `kpu_uri` FROM `v04_kel_uri` WHERE `kdprov`='42385' AND `kdkota`='51358' ORDER BY `last_dprri` ASC LIMIT $limit_off,10");
+	//$rows=all("SELECT `kpu_uri` FROM `v04_kel_uri` WHERE `kdprov`='42385' AND `kdkota`='51358' AND `kdkec`='51539' AND `last_dprri` IS NULL ORDER BY `last_dprri` ASC");
+	//$rows=all("SELECT `kpu_uri` FROM `v04_kel_uri` WHERE `kdprov`='42385' AND `kdkota`='51358' AND `kdkec`='51513' AND `last_dprri` IS NULL");
+	
+	//$rows=all("SELECT `kpu_uri` FROM `v04_kel_uri` WHERE `kdprov`='42385' AND `kdkota`='51358' AND `last_dprri` IS NULL ORDER BY `kdkel` ASC LIMIT $limit_off,10");
+	$rows=all("SELECT `kpu_uri` FROM `v04_kel_uri` WHERE `kdprov`='42385' AND `kdkota`='51358' AND `kdkec`='51527' AND `last_dprri` IS NULL");
+	
+	if(count($rows)>0) {
+		
+		$urls=array();
+		for ($i=0;$i<count($rows);$i++){
+		  $urls[$i]=$rows[$i]['kpu_uri'];
+		  echo "\n $urls[$i]";
+		}
+		//prov/kota-kab/kec/kel
+		//42385/42386/42387/42388
+		$retval = start_suara($urls);
+		
+		echo " $data_loop \n";
+		$data_loop = $data_loop+10;
+		
+		if(is_null($retval)) {
+			$limit_off = $limit_off+10;
+			echo " cont \n";
+		}
+		else {
+			echo " done \n";
+		}
+	}
+	else {
+		echo " LOOP done \n";
+		break;
+	}
   }
-//}
+}
 
 //https://pemilu2019.kpu.go.id/static/json/hhcw/dprri/1/1492/1493/1501.json
 //https://pemilu2019.kpu.go.id/static/json/hhcw/dprri/1/1492/1493/1501/900003213.json TPS
