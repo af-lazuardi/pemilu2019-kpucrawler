@@ -165,7 +165,7 @@ function start_suara($uris){
   return 1;
 }
 
-$limit_off = 0;
+$limit_off = isset($argv[1]) ? $argv[1] : 0;
 $break_loop = false;
 while(!$break_loop) {
 	$rows_kec = all("SELECT `kdkec` FROM `v04_kel_uri` WHERE `kdprov`='42385' AND `kdkota`='51358' AND `last_dprdkab` IS NULL GROUP BY `kdkec` ORDER BY `kdkec` ASC LIMIT $limit_off,5");
