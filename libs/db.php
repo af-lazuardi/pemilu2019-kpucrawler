@@ -5,9 +5,9 @@ set_time_limit(0);
 
 $mysqli = new mysqli(
 	"127.0.0.1",
-	"root",//"kjamid_dbkawal",
-	"root",//"dbkawal175",
-	"dbkawal"//"kjamid_dbkawal"
+	"kjamid_dbkawal",//"root",//
+	"dbkawal175",//"root",//
+	"kjamid_dbkawal"//"dbkawal"//
 );
 
 function query($str){
