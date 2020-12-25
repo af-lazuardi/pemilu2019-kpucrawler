@@ -224,6 +224,7 @@ while(!$break_loop) {
 	else {
 		$break_loop = true;
 		echo " LOOP done \n";
+		$break_loop = true;
 		break;
 	}
   }
