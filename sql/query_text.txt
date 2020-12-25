@@ -1,0 +1,28 @@
+SELECT COUNT(kdkel) FROM t_kel WHERE last IS NULL
+7707
+
+SELECT COUNT(kdkel) FROM t_kel WHERE last IS NOT NULL
+790
+
+
+SELECT COUNT(kdkel) FROM `t_kel` kl LEFT JOIN t_kec kc ON kc.kdkec = kl.kdkec LEFT JOIN t_kota ko ON ko.kdkota = kc.kdkota WHERE ko.kdkota = '51358' AND kl.last_dprri IS NULL
+90
+
+SELECT COUNT(kdkel) FROM `t_kel` kl LEFT JOIN t_kec kc ON kc.kdkec = kl.kdkec LEFT JOIN t_kota ko ON ko.kdkota = kc.kdkota WHERE ko.kdkota = '51358' AND kl.last_dprri IS NOT NULL
+114
+
+
+datetime
+2000-01-01 00:00:00	
+
+
+SELECT * FROM `t_tps_dprri` t LEFT JOIN t_kel kl ON kl.kdkel = t.kdkel LEFT JOIN t_kec kc ON kc.kdkec = kl.kdkec LEFT JOIN t_kota kt ON kt.kdkota = kc.kdkota LEFT JOIN t_prov p ON p.kdprov = kt.kdprov WHERE p.`kdprov`='42385' AND kt.`kdkota` = '51358' AND kc.`kdkec`='51513' ORDER BY kl.`kdkel`  ASC
+
+/home/kjamid/repositories/p19crawler
+
+ 
+ prov yang belum
+ 51364
+ 51390
+ 51403
+ 51520

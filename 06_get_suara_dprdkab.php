@@ -165,64 +165,39 @@ function start_suara($uris){
   return 1;
 }
 
-/*
-start_suara(array(
-  "1/1492/1654/1656",
-  "1/2/9/10"
-));
-*/
+$limit_off = 0;
+$break_loop = false;
+while(!$break_loop) {
+	$rows_kec = all("SELECT `kdkec` FROM `v04_kel_uri` WHERE `kdprov`='42385' AND `kdkota`='51358' AND `last_dprdkab` IS NULL GROUP BY `kdkec` ORDER BY `kdkec` ASC LIMIT $limit_off,5");
 
-$kdprovz=$argv[1];
-if (!$kdprovz){
-  echo "ARGV1 = Kode Propinsi\n";
-  exit();
-}
-
-$PRV=explode(",",$kdprovz);
-
-//51513
-//51527
-//51533
-
-// for ($JJ=0;$JJ<4;$JJ++){
-$data_loop = 0;
-$limit_off = 30;
-//while($limit_off <= 100){
-while(true) {
-  for ($PP=0;$PP<count($PRV);$PP++){
-    //$rows=all("SELECT `kpu_uri` FROM `v04_kel_uri` WHERE `kdprov`='{$PRV[$PP]}' ORDER BY `last_dprdkab` ASC LIMIT $limit_off,10");
-	//$rows=all("SELECT `kpu_uri` FROM `v04_kel_uri` WHERE `kdprov`='42385' AND `kdkota`='51358' ORDER BY `last_dprdkab` ASC LIMIT $limit_off,10");
-	//$rows=all("SELECT `kpu_uri` FROM `v04_kel_uri` WHERE `kdprov`='42385' AND `kdkota`='51358' AND `kdkec`='51539' AND `last_dprdkab` IS NULL ORDER BY `last_dprdkab` ASC");
-	//$rows=all("SELECT `kpu_uri` FROM `v04_kel_uri` WHERE `kdprov`='42385' AND `kdkota`='51358' AND `kdkec`='51513' AND `last_dprdkab` IS NULL");
-	
-	$rows=all("SELECT `kpu_uri` FROM `v04_kel_uri` WHERE `kdprov`='42385' AND `kdkota`='51358' AND `last_dprdkab` IS NULL ORDER BY `kdkel` ASC LIMIT $limit_off,10");
-	
-	if(count($rows)>0) {
+	foreach($rows_kec as $kec) {
+		$kd_kec =  $kec['kdkec'];
+		$rows = all("SELECT `kpu_uri` FROM `v04_kel_uri` WHERE `kdprov`='42385' AND `kdkota`='51358' AND `kdkec`='$kd_kec' ORDER BY `kdkel` ASC");
+		
+		if(count($rows)>0) {
 		$urls=array();
 		for ($i=0;$i<count($rows);$i++){
-		  $urls[$i]=$rows[$i]['kpu_uri'];
-		  echo "\n $urls[$i]";
-		}
-		//prov/kota-kab/kec/kel
-		//42385/42386/42387/42388
-		$retval = start_suara($urls);
-		
-		echo " $data_loop \n";
-		$data_loop = $data_loop+10;
-		
-		if(is_null($retval)) {
-			$limit_off = $limit_off+10;
-			echo " cont \n";
+			  $urls[$i]=$rows[$i]['kpu_uri'];
+			  echo "\n $urls[$i]";
+			}
+			//prov/kota-kab/kec/kel
+			//42385/42386/42387/42388
+			$retval = start_suara($urls);
+			
+			if(is_null($retval)) {
+				continue;
+				echo " cont \n";
+			}
+			else {
+				echo " done \n";
+			}
 		}
 		else {
-			echo " done \n";
+			$break_loop = true;
+			echo " LOOP done \n";
+			break;
 		}
 	}
-	else {
-		echo " LOOP done \n";
-		break;
-	}
-  }
 }
 
 //https://pemilu2019.kpu.go.id/static/json/hhcw/dprdkab/1/1492/1493/1501.json
